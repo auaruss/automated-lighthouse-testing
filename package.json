@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "lighthouse": "^5.1.0"
+  },
+  "dependencies": {
+    "lighthouse-batch": "^5.0.1",
+    "mongodb": "^3.2.7"
+  }
+}

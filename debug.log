@@ -1,0 +1,5 @@
+[0617/112429.097:ERROR:file_io.cc(134)] WriteFile: There is not enough space on the disk. (0x70)
+[0617/112429.099:ERROR:crash_report_exception_handler.cc(111)] WriteEverything failed
+[0617/112429.100:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\Troll\AppData\Local\Temp\lighthouse.91159605\Crashpad\reports\49ea5868-0a66-4505-9d18-d2e227b93294.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0617/112458.804:ERROR:file_io.cc(134)] WriteFile: There is not enough space on the disk. (0x70)
+[0617/112458.805:ERROR:crash_report_exception_handler.cc(111)] WriteEverything failed
