@@ -1,12 +1,32 @@
-// TODOS
-// regexp for todaysDate
-// debug parseXML
-// add tests
-// connect config file properly
-// move timer to a decorator
-// figure out what config in launchChromeAndRunLighthouse really is
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: index.js</title>
 
-"use strict";
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: index.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
 
 const MongoClient = require("mongodb").MongoClient;
 const assert = require("assert");
@@ -51,13 +71,15 @@ const SITES = [
   // "iujur.iu.edu"
 ];
 
-const uri = "mongodb+srv://admin:admin@lighthouse-3rte9.mongodb.net/test?retryWrites=true&w=majority";
-const lighthouse_opts = {
+const uri = "mongodb+srv://admin:admin@lighthouse-3rte9.mongodb.net/test?retryWrites=true&amp;w=majority";
+const opts = {
   chromeFlags: ['--headless'],
 };
 
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
+
+//TODO: refactor with regexp
 /**
  * Constructs today's date as a numeric string in the format MMDDYYYY
  * @return today's date in MMDDYYYY
@@ -65,10 +87,10 @@ const client = new MongoClient(uri, { useNewUrlParser: true });
 function todaysDate() {
   const d = new Date();
   let month = (d.getMonth() + 1).toString();
-  if (month.length <= 1) { month = '0' + month; }
+  if (month.length &lt;= 1) { month = '0' + month; }
 
   let day = d.getDate();
-  if (day.length <= 1) { day = '0' + day; }
+  if (day.length &lt;= 1) { day = '0' + day; }
 
   return month + day + d.getFullYear();
 }
@@ -94,13 +116,13 @@ function addObjectToDB(data) {
 /**
  * Source: https://github.com/GoogleChrome/lighthouse/blob/master/docs/headless-chrome.md
  * @param {String} url url to be tested by lighthouse
- * @param {JSON} lighthouse_opts options for lighthouse
+ * @param {JSON} opts options for lighthouse
  * @param {*} config
  */
-function launchChromeAndRunLighthouse(url, lighthouse_opts, config = null) {
-  return chromeLauncher.launch({chromeFlags: lighthouse_opts.chromeFlags}).then(chrome => {
-    lighthouse_opts.port = chrome.port;
-    return lighthouse(url, lighthouse_opts, config).then(results => {
+function launchChromeAndRunLighthouse(url, opts, config = null) {
+  return chromeLauncher.launch({chromeFlags: opts.chromeFlags}).then(chrome => {
+    opts.port = chrome.port;
+    return lighthouse(url, opts, config).then(results => {
       return chrome.kill().then(() => results.lhr);
     });
   }).catch();
@@ -115,7 +137,7 @@ async function testSitesAndAddToDB(sites) {
 
   for (let site of sites) {
     console.log("Testing " + site);
-    await launchChromeAndRunLighthouse(site, lighthouse_opts).then(results => {
+    await launchChromeAndRunLighthouse(site, opts).then(results => {
       addObjectToDB({
         "_id": site,
         "json": JSON.stringify(results)
@@ -125,6 +147,56 @@ async function testSitesAndAddToDB(sites) {
 
   time = (Date.now() - time) / 1000;
   console.log("This took " + time + " seconds");
+}
+
+/**
+ * From a list of sitemaps, gets all pages linked to
+ * @param {string[]} sites list of site links to XML files 
+ * @return {string[]} list of pages to linked to in all sitemaps
+ */
+async function buildPageList(sites) {
+  return await sites.map(site => parseXML(site));
+              // .reduce((returnedList, nextList) => returnedList.concat(nextList), []);
+}
+
+/**
+ * Converts an XML sitemap link into a list of all the sites linked to on the sitemap
+ * @param {string} site link to an XML
+ * @return {string[]} array of sites linked to in the XML 
+ */
+function parseXML(site) {
+  let sites = []
+
+  const options = {
+    hostname: site,
+    port: 443,
+    path: '/sitemap.xml',
+    method: 'GET'
+  };
+
+  const req = https.request(options, (res) => {
+    res.on('data', (d) => {
+      parseString(d.toString(), function (err, result) {
+        const xmls = result.urlset.url;
+        for (let xml of xmls) {
+          sites.push(xml.loc[0]);
+          // console.log(sites);
+          // console.log(xml.loc[0]);
+        }
+      });
+    });
+
+    res.on('end', (d) => {
+      sites.forEach(site => console.log('\"' + site + '\",'));
+    });
+  });
+
+  req.on('error', (e) => {
+    console.error(e);
+  });
+  req.end();
+  
+  return sites;
 }
 
 /**
@@ -1028,4 +1100,26 @@ function main() {
 }
 
 main();
-client.close(); // where does this go?
+client.close(); // where does this go?</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addObjectToDB">addObjectToDB</a></li><li><a href="global.html#buildPageList">buildPageList</a></li><li><a href="global.html#launchChromeAndRunLighthouse">launchChromeAndRunLighthouse</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#parseXML">parseXML</a></li><li><a href="global.html#testSitesAndAddToDB">testSitesAndAddToDB</a></li><li><a href="global.html#todaysDate">todaysDate</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.2</a> on Tue Jun 25 2019 11:00:53 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
