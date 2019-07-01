@@ -1,9 +1,7 @@
 // TODOS
-// regexp for todaysDate
 // debug parseXML in sitemapProcessor.js
 // add tests
 // connect config file properly
-// move timer to a decorator
 // figure out what config in launchChromeAndRunLighthouse really is 
 "use strict";
 
