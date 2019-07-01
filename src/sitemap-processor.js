@@ -50,3 +50,8 @@ function parseXML(site) {
   
   return sites;
 }
+
+module.exports = {
+  "buildPageList": buildPageList,
+  "parseXML": parseXML
+}

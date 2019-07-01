@@ -5,15 +5,13 @@
 // figure out what config in launchChromeAndRunLighthouse really is 
 "use strict";
 
-
-
 const MongoClient = require("mongodb").MongoClient;
 const lighthouse = require("lighthouse");
 const chromeLauncher = require("chrome-launcher");
 const config = require("../config");
 
 const pages = config.pages;
-const uri = "mongodb+srv://admin:admin@lighthouse-3rte9.mongodb.net/test?retryWrites=true&w=majority";
+const uri = config.uri;
 const lighthouse_opts = config.lighthouse_opts;
 
 const client = new MongoClient(uri, { useNewUrlParser: true });
@@ -34,6 +32,7 @@ function addObjectToDB(data) {
       console.log("Inserted document into the collection");
     });
   });
+  client.close(); // where does this go?
 };
 
 /**
@@ -80,4 +79,3 @@ function main() {
 }
 
 main();
-client.close(); // where does this go?
