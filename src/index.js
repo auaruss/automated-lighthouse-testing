@@ -10,28 +10,13 @@
 const MongoClient = require("mongodb").MongoClient;
 const lighthouse = require("lighthouse");
 const chromeLauncher = require("chrome-launcher");
-const config = require("./config");
+const config = require("../config");
 
 const pages = config.pages;
 const uri = "mongodb+srv://admin:admin@lighthouse-3rte9.mongodb.net/test?retryWrites=true&w=majority";
 const lighthouse_opts = config.lighthouse_opts;
 
 const client = new MongoClient(uri, { useNewUrlParser: true });
-
-/**
- * Constructs today's date as a numeric string in the format MMDDYYYY
- * @return today's date in MMDDYYYY
- */
-function todaysDate() {
-  const d = new Date();
-  let month = (d.getMonth() + 1).toString();
-  if (month.length <= 1) { month = '0' + month; }
-
-  let day = d.getDate();
-  if (day.length <= 1) { day = '0' + day; }
-
-  return month + day + d.getFullYear();
-}
 
 /**
  * Adds a piece of data to our MongoDB
