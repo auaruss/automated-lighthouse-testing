@@ -7,5 +7,8 @@
     "lighthouse-batch": "^5.0.1",
     "mongodb": "^3.2.7",
     "xml2js": "^0.4.19"
+  },
+  "scripts": {
+    "test": "mocha"
   }
 }
