@@ -4,7 +4,7 @@ const assert = require("assert");
 const sitemapProcessor = require("../src/sitemap-processor");
 
 
-describe("utils", () => {
+describe("sitemap-processor", () => {
   describe("buildPageList", () => {
     it("should exist", () => {
       assert.notEqual(sitemapProcessor.buildPageList, undefined);

@@ -9,10 +9,12 @@ const MongoClient = require("mongodb").MongoClient;
 const lighthouse = require("lighthouse");
 const chromeLauncher = require("chrome-launcher");
 const config = require("../config");
+const utils = require("./utils");
 
 const pages = config.pages;
 const uri = config.uri;
 const lighthouse_opts = config.lighthouse_opts;
+const todaysDate = utils.todaysDate;
 
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
@@ -28,12 +30,10 @@ function addObjectToDB(data) {
     collection.insertMany([
       data
     ], function(err, result) {
-      assert.equal(err, null);
       console.log("Inserted document into the collection");
     });
   });
-  client.close(); // where does this go?
-};
+}
 
 /**
  * Source: https://github.com/GoogleChrome/lighthouse/blob/master/docs/headless-chrome.md
@@ -62,7 +62,20 @@ async function testSitesAndAddToDB(sites) {
     await launchChromeAndRunLighthouse(site, lighthouse_opts).then(results => {
       addObjectToDB({
         "_id": site,
-        "json": JSON.stringify(results)
+        // "json": JSON.stringify(results),
+        "first-contentful-paint": results.audits["first-contentful-paint"],
+        "first-meaningful-paint": results.audits["first-meaningful-paint"],
+        "speed-index": results.audits["speed-index"],
+        "first-cpu-idle": results.audits["first-cpu-idle"],
+        "dom-size": results.audits["dom-size"],
+        "estimated-input-latency": results.audits["estimated-input-latency"],
+        "network-payload": results.audits["total-byte-weight"],
+        "legible-font-sizes": results.audits["font-size"],
+        "performance-info": results.categories["performance"],
+        "accessibility-info": results.categories["accessibility"],
+        "best-practices-info": results.categories["best-practices"],
+        "seo-info": results.categories["seo"],
+        "pwa-info": results.categories["pwa"]
       });
     }).catch();
   }
@@ -76,6 +89,7 @@ async function testSitesAndAddToDB(sites) {
  */
 function main() {
   testSitesAndAddToDB(pages);
+  client.close(); // where does this go?
 }
 
 main();

@@ -6,8 +6,8 @@ const parseString = require('xml2js').parseString;
  * @param {string[]} sites list of site links to XML files 
  * @return {string[]} list of pages to linked to in all sitemaps
  */
-async function buildPageList(sites) {
-  return await sites.map(site => parseXML(site));
+function buildPageList(sites) {
+  return sites.map(site => parseXML(site));
               // .reduce((returnedList, nextList) => returnedList.concat(nextList), []);
 }
 
@@ -16,7 +16,7 @@ async function buildPageList(sites) {
  * @param {string} site link to an XML
  * @return {string[]} array of sites linked to in the XML 
  */
-function parseXML(site) {
+async function parseXML(site) {
   let sites = []
 
   const options = {
@@ -32,8 +32,6 @@ function parseXML(site) {
         const xmls = result.urlset.url;
         for (let xml of xmls) {
           sites.push(xml.loc[0]);
-          // console.log(sites);
-          // console.log(xml.loc[0]);
         }
       });
     });
