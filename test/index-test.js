@@ -14,10 +14,6 @@ describe("index", () => {
     
   });
 
-  describe("launchChromeAndRunLighthouse", () => {
-    
-  });
-
   describe("testSitesAndAddToDB", () => {
     
   });
