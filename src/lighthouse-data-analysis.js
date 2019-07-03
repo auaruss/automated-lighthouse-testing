@@ -1,7 +1,6 @@
 "use strict";
 
 const PASSING_SCORES = require("../config").PASSING_SCORES;
-const SAMPLE_DATA = require("../sample-data").SAMPLE_DATA;
 
 /**
  * @param {JSON} attributesJson saved data from lighthouse test
