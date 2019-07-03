@@ -91,4 +91,6 @@ function main() {
   testSitesAndAddToDB(pages);
 }
 
-// main();
+if (require.main === module) {
+  main();
+}

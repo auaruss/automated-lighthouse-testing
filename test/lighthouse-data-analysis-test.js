@@ -6,7 +6,7 @@ const SAMPLE_DATA = require("../sample-data").SAMPLE_DATA;
 
 describe("lighthouse-data-analysis", () => {
   describe("analyzeAttributes", () => {
-    it("should test all the attributes we saved to see if they pass a predefined score", () => {
+    it("tests all the attributes we saved to see if they pass a predefined score", () => {
       const analyzedJson = lighthouseDataAnalysis.analyzeAttributes(SAMPLE_DATA);
       assert.equal("object", typeof analyzedJson);
       assert.equal("boolean", typeof analyzedJson["first-contentful-paint"]);

@@ -13,7 +13,7 @@
 
 // describe("index", () => {
 //   describe("testSitesAndAddToDB", () => {
-//     it("should have added all the correct sites to the database", () => {
+//     it("adds all the correct sites to the database", () => {
 //       for (let page of config.pages) {
 //         MongoClient.connect(uri, (err, client) => {
 //           console.log(err);

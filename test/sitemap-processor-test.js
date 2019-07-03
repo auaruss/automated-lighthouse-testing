@@ -6,11 +6,11 @@ const sitemapProcessor = require("../src/sitemap-processor");
 
 describe("sitemap-processor", () => {
   describe("buildPageList", () => {
-    it("should exist", () => {
+    it("exists", () => {
       assert.notEqual(sitemapProcessor.buildPageList, undefined);
     });
 
-    it("should return an array of strings", () => {
+    it("returns an array of strings", () => {
       const pageList = sitemapProcessor.buildPageList();
       assert.equal(typeof pageList, 'object');
       assert.equal(typeof pageList[0], 'string');
@@ -18,11 +18,11 @@ describe("sitemap-processor", () => {
   });
 
   describe("parseXML", () => {
-    it("should exist", () => {
+    it("exists", () => {
       assert.notEqual(sitemapProcessor.parseXML, undefined);
     });
 
-    it("should return an array of strings", () => {
+    it("returns an array of strings", () => {
       const pageList = sitemapProcessor.parseXML();
       assert.equal(typeof pageList, 'object');
       assert.equal(typeof pageList[0], 'string');
