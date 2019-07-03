@@ -1,6 +1,7 @@
 "use strict";
 
 const PASSING_SCORES = require("../config").PASSING_SCORES;
+const SAMPLE_DATA = require("../sample-data").SAMPLE_DATA;
 
 /**
  * @param {JSON} attributesJson saved data from lighthouse test
@@ -9,13 +10,22 @@ const PASSING_SCORES = require("../config").PASSING_SCORES;
  */
 function analyzeAttributes(attributesJson, passingScores=PASSING_SCORES) {
   let analyzedJson = {}
+  
   for (let key in attributesJson) {
-    if (attributesJson[key][score].hasOwnProperty("$numberDouble")) {
+    if (key == "_id") {
+      continue;
+    }
+    console.log(attributesJson[key]["score"]);
+    if (attributesJson[key]["score"].hasOwnProperty("$numberDouble")) {
       analyzedJson[key] = attributesJson[key]["score"]["$numberDouble"] >= passingScores[key];
     } else {
       analyzedJson[key] = attributesJson[key]["score"]["$numberInt"] == 1;
     }
   }
-  console.log(analyzedJson);  
+
   return analyzedJson;
+}
+
+module.exports = {
+  "analyzeAttributes": analyzeAttributes
 }

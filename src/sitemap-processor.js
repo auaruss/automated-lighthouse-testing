@@ -7,7 +7,7 @@ const parseString = require('xml2js').parseString;
  * @return {string[]} list of pages to linked to in all sitemaps
  */
 function buildPageList(sites) {
-  return sites.map(site => parseXML(site));
+  // return sites.map(site => parseXML(site));
               // .reduce((returnedList, nextList) => returnedList.concat(nextList), []);
 }
 

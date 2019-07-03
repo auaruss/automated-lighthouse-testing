@@ -1,6 +1,7 @@
 // TODOS
 // debug parseXML in sitemapProcessor.js
 // figure out what config in launchChromeAndRunLighthouse really is
+// make sure all non-logic info (like the specific sites to be tested) are in config, not the code
 "use strict";
 
 const MongoClient = require("mongodb").MongoClient;
@@ -90,4 +91,4 @@ function main() {
   testSitesAndAddToDB(pages);
 }
 
-main();
+// main();
