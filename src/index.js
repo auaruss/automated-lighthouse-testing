@@ -1,8 +1,6 @@
 // TODOS
 // debug parseXML in sitemapProcessor.js
-// add tests
-// connect config file properly
-// figure out what config in launchChromeAndRunLighthouse really is 
+// figure out what config in launchChromeAndRunLighthouse really is
 "use strict";
 
 const MongoClient = require("mongodb").MongoClient;
@@ -32,6 +30,7 @@ function addObjectToDB(data) {
     ], function(err, result) {
       console.log("Inserted document into the collection");
     });
+    client.close(); // where does this go?
   });
 }
 
@@ -89,7 +88,6 @@ async function testSitesAndAddToDB(sites) {
  */
 function main() {
   testSitesAndAddToDB(pages);
-  client.close(); // where does this go?
 }
 
 main();
