@@ -1,7 +1,3 @@
-// TODOS
-// debug parseXML in sitemapProcessor.js
-// figure out what config in launchChromeAndRunLighthouse really is
-// make sure all non-logic info (like the specific sites to be tested) are in config, not the code
 "use strict";
 
 const MongoClient = require("mongodb").MongoClient;
@@ -28,12 +24,11 @@ function addObjectToDB(data) {
     const date = todaysDate();
     const collection = client.db("lighthouse_test").collection(date);
     
-    collection.insertMany([
-      data
-    ], function(err, result) {
+    collection.insertOne(
+      data, function(err, result) {
       console.log("Inserted document into the collection");
     });
-    client.close(); // where does this go?
+    
   });
 }
 
@@ -79,4 +74,5 @@ function main() {
 
 if (require.main === module) {
   main();
+  client.close(); // where does this go?
 }
