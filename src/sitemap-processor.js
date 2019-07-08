@@ -60,10 +60,10 @@ function parseXML(site) {
   return sites;
 }
 
+buildPageList(INIT_SITES);
+setTimeout(() => { console.log(sites); }, TIMEOUT_THAT_SHOULD_NOT_EXIST);
+
 module.exports = {
   "buildPageList": buildPageList,
   "parseXML": parseXML
 }
-
-buildPageList(INIT_SITES);
-setTimeout(() => { console.log(sites); }, TIMEOUT_THAT_SHOULD_NOT_EXIST);
