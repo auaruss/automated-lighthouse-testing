@@ -9,10 +9,12 @@ const lighthouse = require("lighthouse");
 const chromeLauncher = require("chrome-launcher");
 const config = require("../config");
 const utils = require("./utils");
+const sitemapProcessor = require("./sitemap-processor");
 
-const pages = config.pages;
+const pages = sitemapProcessor.sites;
 const uri = config.uri;
-const lighthouse_opts = config.lighthouse_opts;
+const lighthouseOpts = config.lighthouse_opts;
+const lighthouseDataSaved = config.lighthouseDataSaved;
 const todaysDate = utils.todaysDate;
 
 const client = new MongoClient(uri, { useNewUrlParser: true });
@@ -59,24 +61,8 @@ async function testSitesAndAddToDB(sites) {
 
   for (let site of sites) {
     console.log("Testing " + site);
-    await launchChromeAndRunLighthouse(site, lighthouse_opts).then(results => {
-      addObjectToDB({
-        "_id": site,
-        // "json": JSON.stringify(results),
-        "first-contentful-paint": results.audits["first-contentful-paint"],
-        "first-meaningful-paint": results.audits["first-meaningful-paint"],
-        "speed-index": results.audits["speed-index"],
-        "first-cpu-idle": results.audits["first-cpu-idle"],
-        "dom-size": results.audits["dom-size"],
-        "estimated-input-latency": results.audits["estimated-input-latency"],
-        "network-payload": results.audits["total-byte-weight"],
-        "legible-font-sizes": results.audits["font-size"],
-        "performance-info": results.categories["performance"],
-        "accessibility-info": results.categories["accessibility"],
-        "best-practices-info": results.categories["best-practices"],
-        "seo-info": results.categories["seo"],
-        "pwa-info": results.categories["pwa"]
-      });
+    await launchChromeAndRunLighthouse(site, lighthouseOpts).then(results => {
+      addObjectToDB(lighthouseDataSaved(site));
     }).catch();
   }
 
