@@ -1,5 +1,12 @@
 "use strict";
 
+/* Ideas for analysis
+ * Retrieve top/bottom X sites for any particular measure
+ * array of certain measure for certain page over time
+ * array of average over an entire site over time
+ * combine the above with tests for passing scores
+ */
+
 const PASSING_SCORES = require("../config").PASSING_SCORES;
 
 /**
@@ -9,17 +16,19 @@ const PASSING_SCORES = require("../config").PASSING_SCORES;
  */
 function analyzeAttributes(attributesJson, passingScores=PASSING_SCORES) {
   let analyzedJson = {}
+  let testKey = (key) => {
+    if ( !(key == "_id") ) {
+      // console.log(attributesJson[key]["score"]);
+      if (attributesJson[key]["score"].hasOwnProperty("$numberDouble")) {
+        analyzedJson[key] = attributesJson[key]["score"]["$numberDouble"] >= passingScores[key];
+      } else {
+        analyzedJson[key] = attributesJson[key]["score"]["$numberInt"] == 1;
+      }
+    }
+  }
   
   for (let key in attributesJson) {
-    if (key == "_id") {
-      continue;
-    }
-    console.log(attributesJson[key]["score"]);
-    if (attributesJson[key]["score"].hasOwnProperty("$numberDouble")) {
-      analyzedJson[key] = attributesJson[key]["score"]["$numberDouble"] >= passingScores[key];
-    } else {
-      analyzedJson[key] = attributesJson[key]["score"]["$numberInt"] == 1;
-    }
+    testKey(key);
   }
 
   return analyzedJson;

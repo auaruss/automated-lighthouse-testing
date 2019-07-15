@@ -11,78 +11,8 @@ const uri = config.uri;
 const lighthouseOpts = config.lighthouse_opts;
 const lighthouseDataSaved = config.lighthouseDataSaved;
 const todaysDate = utils.todaysDate;
-
-/*
- * I have used a bad solution for fixing the async problems in this file.
- * The intended thing to happen is to pass an array of sitemap links to buildPageList, then
- * buildPageList returns an array of sites linked to by all those sitemaps.
- * Before the solution, parseXML returned nothing. I added an empty array at the top and am now adding
- * each site to it in parseXML, then waiting with a setTimeout at the end.
- * This should be done in a different way, but I couldn't figure out how.
- * 
- * I also copy pasted the entire code from sitemap-processor.js back into this file. It doesn't work otherwise.
- */
-
-// START sitemap-processor.js
-
-const https = require("https");
-const parseString = require('xml2js').parseString;
-// const config = require("../config");
-
-const INIT_SITES = config.INIT_SITES;
-const TIMEOUT_THAT_SHOULD_NOT_EXIST = 10000;
-
-let sites = []
-/**
- * From a list of sitemaps, gets all pages linked to
- * @param {string[]} sites list of site links to XML files 
- */
-function buildPageList(sites) {
-  for (let site of sites) {
-    parseXML(site);
-  }
-}
-
-/**
- * Converts an XML sitemap link into a list of all the sites linked to on the sitemap
- * @param {string} site link to an XML
- */
-function parseXML(site) {
-  
-
-  const options = {
-    hostname: site,
-    port: 443,
-    path: '/sitemap.xml',
-    method: 'GET'
-  };
-
-  const req = https.request(options, (res) => {
-    res.on('data', (d) => {
-      parseString(d.toString(), function (err, result) {
-        try {
-          const xmls = result.urlset.url;
-          for (let xml of xmls) {
-            sites.push(xml.loc[0]);
-          }
-        } catch (e) {}
-      });
-    });
-  });
-
-  req.on('error', (e) => {
-    console.error(e);
-  });
-  req.end();
-  
-  return sites;
-}
-
 const client = new MongoClient(uri, { useNewUrlParser: true });
-
-// END sitemap-processor.js
-
-const pages = sites;
+const buildPageList = sitemapProcessor.buildPageList;
 
 /**
  * Adds a piece of data to our MongoDB
@@ -155,12 +85,13 @@ async function testSitesAndAddToDB(sites) {
 /**
  * Test a number of sites with lighthouse then save the results to a database
  */
-function main() {
+function main(pages) {
   testSitesAndAddToDB(pages);
 }
 
 if (require.main === module) {
-  buildPageList(INIT_SITES);
-  setTimeout(() => { main(); }, TIMEOUT_THAT_SHOULD_NOT_EXIST);
+  buildPageList(INIT_SITES).then(res => {
+    main(res);
+  });
   client.close(); // where does this go?
 }
