@@ -1,10 +1,5 @@
 const https = require("https");
 const parseString = require('xml2js').parseString;
-const config = require("../config");
-
-const INIT_SITES = config.INIT_SITES;
-const TIMEOUT_THAT_SHOULD_NOT_EXIST = 10000;
-
 
 /**
  * From a list of sitemaps, gets all pages linked to
@@ -24,13 +19,17 @@ function buildPageList(sites) {
  * @param {string} site link to an XML
  * @return {Promise<string[]>} all pages linked to from the XML
  */
-function parseXML(site) {
-  const options = {
-    hostname: site,
-    port: 443,
-    path: "/sitemap.xml",
-    method: "GET"
-  };
+function parseXML(site, options=undefined) {
+
+  // To allow other users to specify a different location of the XML on the site
+  if (! options) {
+    options = {
+      hostname: site,
+      port: 443,
+      path: "/sitemap.xml",
+      method: "GET"
+    };
+  }
   
   let sites = [];
 

@@ -1,3 +1,10 @@
+/* TODO
+ * Write the readme.md specifying what needs to go in config.js (maybe convert to ini)
+ * Figure out how to close the client so we aren't opening up 1000 connections to the DB 
+ * Write/fix unit tests
+ * Write more analysis functions?
+ */
+
 "use strict";
 
 const MongoClient = require("mongodb").MongoClient;
@@ -9,10 +16,10 @@ const sitemapProcessor = require("./sitemap-processor");
 
 const uri = config.uri;
 const lighthouseOpts = config.lighthouse_opts;
-const lighthouseDataSaved = config.lighthouseDataSaved;
 const todaysDate = utils.todaysDate;
-const client = new MongoClient(uri, { useNewUrlParser: true });
 const buildPageList = sitemapProcessor.buildPageList;
+
+const client = new MongoClient(uri, { useNewUrlParser: true });
 
 /**
  * Adds a piece of data to our MongoDB
@@ -27,7 +34,6 @@ function addObjectToDB(data) {
       data, function(err, result) {
       console.log("Inserted document into the collection");
     });
-    
   });
 }
 
@@ -85,13 +91,9 @@ async function testSitesAndAddToDB(sites) {
 /**
  * Test a number of sites with lighthouse then save the results to a database
  */
-function main(pages) {
-  testSitesAndAddToDB(pages);
-}
-
 if (require.main === module) {
-  buildPageList(INIT_SITES).then(res => {
-    main(res);
+  buildPageList(config.INIT_SITES).then(res => {
+    testSitesAndAddToDB(res);
   });
   client.close(); // where does this go?
 }
