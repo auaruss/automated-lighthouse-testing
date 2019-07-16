@@ -3,6 +3,8 @@
  * Figure out how to close the client so we aren't opening up 1000 connections to the DB 
  * Write/fix unit tests
  * Write more analysis functions?
+ * Why does the program hang after running all tests? (Related to client.close() location?)
+ * Try removing the setTimeout in sitemap-processor
  */
 
 "use strict";

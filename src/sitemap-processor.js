@@ -1,5 +1,5 @@
 const https = require("https");
-const parseString = require('xml2js').parseString;
+const config = require("../config");
 
 /**
  * From a list of sitemaps, gets all pages linked to
@@ -34,23 +34,23 @@ function parseXML(site, options=undefined) {
   let sites = [];
 
   const req = https.request(options, (res) => {
+    let sitemapString = "";
+    
     res.on('data', (d) => {
-      parseString(d.toString(), function (err, result) {
-        try {
-          const xmls = result.urlset.url;
-          for (let xml of xmls) {
-            sites.push(xml.loc[0]);
-          }
-        } catch (e) {}
-      });
+      sitemapString += d.toString();
+    });
+
+    res.on('end', () => {
+      sites = sitemapString.replace(/(\r\n|\n|\r|\s)/gm, "").match(/https[^<]+/g);
     });
   });
 
   req.on('error', (e) => {
     console.error(e);
   });
+
   req.end();
-  
+
   return new Promise((res, err) => {
     setTimeout(() => {
 			res(sites);
@@ -62,3 +62,5 @@ module.exports = {
   "buildPageList": buildPageList,
   "parseXML": parseXML
 }
+
+// buildPageList(config.INIT_SITES).then((res) => { console.log(res)});

@@ -18,7 +18,6 @@ function analyzeAttributes(attributesJson, passingScores=PASSING_SCORES) {
   let analyzedJson = {}
   let testKey = (key) => {
     if ( !(key == "_id") ) {
-      // console.log(attributesJson[key]["score"]);
       if (attributesJson[key]["score"].hasOwnProperty("$numberDouble")) {
         analyzedJson[key] = attributesJson[key]["score"]["$numberDouble"] >= passingScores[key];
       } else {
