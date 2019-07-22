@@ -12,10 +12,10 @@ Then, install the Lighthouse API with
 npm i lighthouse
 ```
 
-Finally, you'll need to make a config.json with the following keys:<br/><br/>
-"uri" (the location of your MongoDB, )<br/><br/>
-"SITE_LIST" (an array of strings, each being a site with a sitemap)<br/><br/>
-"LIGHTHOUSE_OPTS"<br/><br/>
+Finally, you'll need to make a config.json with the following keys:<br/>
+"uri" (the location of your MongoDB, )<br/>
+"SITE_LIST" (an array of strings, each being a site with a sitemap)<br/>
+"LIGHTHOUSE_OPTS"<br/>
 "SITEMAP_OPTS" (optional; you don't need this if your sitemaps are located at /sitemap.xml)
 
 Example of LIGHTHOUSE_OPTS (feel free to use this example):
@@ -39,8 +39,8 @@ Example of LIGHTHOUSE_OPTS (feel free to use this example):
         ]
     }
 
-To learn more, see:<br/><br/>
-https://github.com/GoogleChrome/lighthouse/blob/master/docs/readme.md#using-programmatically <br/><br/>
+To learn more, see:<br/>
+https://github.com/GoogleChrome/lighthouse/blob/master/docs/readme.md#using-programmatically <br/>
 https://github.com/GoogleChrome/lighthouse/blob/888bd6dc9d927a734a8e20ea8a0248baa5b425ed/typings/externs.d.ts#L82-L119
 
 ## Usage
