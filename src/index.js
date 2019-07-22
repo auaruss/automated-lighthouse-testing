@@ -11,7 +11,11 @@ const uri = config.uri;
 const lighthouseOpts = config.LIGHTHOUSE_OPTS;
 const todaysDate = utils.todaysDate;
 const buildPageList = sitemapProcessor.buildPageList;
-const sitemap_opts = config.o;
+
+const sitemap_opts;
+if (config.hasOwnProperty("SITEMAP_OPTS")) {
+  sitemap_opts = config.SITEMAP_OPTS;
+}
 
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
