@@ -4,17 +4,22 @@ This is a tool using Lighthouse to test all the pages in a list of sites and sav
 
 ## Dependencies and installation
 
-You'll need node.js https://nodejs.org/en/download/
+### Step 1
+Install node.js https://nodejs.org/en/download/
 
-Then, install the Lighthouse API with
+### Step 2
+Install the Lighthouse API with
 
 ```bash
 npm i lighthouse
 ```
-
-Then, clone this project.
-
-Finally, you'll need to make a config.json in the root directory of the projectwith the following keys:<br/>
+### Step 3
+Clone this project. Go up to the "Clone or Download" button on the right and copy the URL. Then run this:
+```bash
+git clone <this url>
+```
+### Step 4
+Make a config.json in the root directory of the projectwith the following keys:<br/>
 "uri" (the location of your MongoDB, see https://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#the-url-connection-format)<br/>
 "SITE_LIST" (an array of strings, each being a site with a sitemap)<br/>
 "LIGHTHOUSE_OPTS"<br/>
