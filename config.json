@@ -1,0 +1,52 @@
+{
+  "uri": "mongodb+srv://admin:admin@lighthouse-3rte9.mongodb.net/test?retryWrites=true&w=majority",
+  "SITE_LIST": [
+    "acp.iu.edu",
+    "bar.indiana.edu",
+    "iubest.indiana.edu",
+    "employers.cdc.indiana.edu",
+    "cdc.indiana.edu",
+    "studentemployment.cdc.indiana.edu",
+    "class.indiana.edu",
+    "sit.indiana.edu",
+    "engagedlearning.indiana.edu",
+    "gened.indiana.edu",
+    "hpplc.indiana.edu",
+    "hutton.indiana.edu",
+    "hiep.indiana.edu",
+    "ifs.indiana.edu",
+    "ovpueit.indiana.edu",
+    "iu2u.indiana.edu",
+    "accreditation.indiana.edu",
+    "iuhighschool.iu.edu",
+    "undergradresearch.indiana.edu",
+    "open.indiana.edu",
+    "nsa.indiana.edu",
+    "ovpue.indiana.edu",
+    "tsap.indiana.edu",
+    "sab.ovpue.indiana.edu",
+    "nondegree.indiana.edu",
+    "sac.indiana.edu",
+    "ud.indiana.edu",
+    "wellsscholars.indiana.edu",
+    "womeninstem.indiana.edu",
+    "wts.indiana.edu",
+    "citl.indiana.edu",
+    "iujur.iu.edu"
+  ],
+  "LIGHTHOUSE_OPTS": {
+    "chromeFlags": ["--headless"]
+  },
+
+  "PASSING_SCORES": {
+    "first-contentful-paint": 0,
+    "first-meaningful-paint": 0,
+    "speed-index": 0,
+    "first-cpu-idle": 0,
+    "performance-info": 0,
+    "accessibility-info": 0,
+    "best-practices-info": 0,
+    "seo-info": 0,
+    "pwa-info": 0
+  }
+}

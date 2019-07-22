@@ -15,7 +15,7 @@ npm i lighthouse
 Then, clone this project.
 
 Finally, you'll need to make a config.json in the root directory of the projectwith the following keys:<br/>
-"uri" (the location of your MongoDB)<br/>
+"uri" (the location of your MongoDB, see https://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#the-url-connection-format)<br/>
 "SITE_LIST" (an array of strings, each being a site with a sitemap)<br/>
 "LIGHTHOUSE_OPTS"<br/>
 "SITEMAP_OPTS" (optional; you don't need this if your sitemaps are located at /sitemap.xml)
