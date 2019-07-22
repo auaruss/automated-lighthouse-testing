@@ -3,7 +3,7 @@
 const MongoClient = require("mongodb").MongoClient;
 const lighthouse = require("lighthouse");
 const chromeLauncher = require("chrome-launcher");
-const config = require("../config");
+const config = require("../config.json");
 const utils = require("./utils");
 const sitemapProcessor = require("./sitemap-processor");
 
@@ -11,6 +11,7 @@ const uri = config.uri;
 const lighthouseOpts = config.LIGHTHOUSE_OPTS;
 const todaysDate = utils.todaysDate;
 const buildPageList = sitemapProcessor.buildPageList;
+const sitemap_opts = config.o;
 
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
@@ -32,7 +33,7 @@ function addObjectToDB(data) {
 
 /**
  * Source: https://github.com/GoogleChrome/lighthouse/blob/master/docs/headless-chrome.md
- * @param {String} url url to be tested by lighthouse
+ * @param {string} url url to be tested by lighthouse
  * @param {JSON} lighthouse_opts options for lighthouse
  * @param {*} config
  */
@@ -47,7 +48,7 @@ function launchChromeAndRunLighthouse(url, lighthouse_opts, config = null) {
 
 /**
  * Test a site with lighthouse then save the results to a database
- * @param {String} site the site address to lighthouse test
+ * @param {string} site the site address to lighthouse test
  */
 async function testSitesAndAddToDB(sites) {
   let time = Date.now();
@@ -84,7 +85,7 @@ async function testSitesAndAddToDB(sites) {
  * Test a number of sites with lighthouse then save the results to a database
  */
 if (require.main === module) {
-  buildPageList(config.SITE_LIST).then(res => {
+  buildPageList(config.SITE_LIST, sitemap_opts).then(res => {
     testSitesAndAddToDB(res);
   });
   client.close(); // where does this go?
