@@ -35,22 +35,7 @@
     "iujur.iu.edu"
   ],
   "LIGHTHOUSE_OPTS": {
-    "chromeFlags": ["--headless"],
-    "onlyAudits": [
-      "first-contentful-paint",
-      "first-meaningful-paint",
-      "speed-index",
-      "first-cpu-idle",
-      "dom-size",
-      "estimated-input-latency",
-      "network-payload",
-      "legible-font-sizes",
-      "performance-info",
-      "accessibility-info",
-      "best-practices-info",
-      "seo-info",
-      "pwa-info"
-    ]
+    "chromeFlags": ["--headless"]
   },
 
   "PASSING_SCORES": {
