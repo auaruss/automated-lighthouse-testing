@@ -6,6 +6,5 @@
   ],
   "LIGHTHOUSE_OPTS": {
     "chromeFlags": ["--headless"]
-    ]
-  },
+  }
 }
