@@ -1,5 +1,4 @@
 const https = require("https");
-const config = require("../config");
 
 /**
  * From a list of sitemaps, gets all pages linked to
@@ -17,13 +16,14 @@ function buildPageList(sites) {
 /**
  * Converts an XML sitemap link into a list of all the sites linked to on the sitemap
  * @param {string} site link to an XML
+ * @param {JSON} sitemap_opts options for the sitemap request
  * @return {Promise<string[]>} all pages linked to from the XML
  */
-function parseXML(site, options=undefined) {
+function parseXML(site, sitemap_opts=undefined) {
 
   // To allow other users to specify a different location of the XML on the site
-  if (! options) {
-    options = {
+  if (! sitemap_opts) {
+    sitemap_opts = {
       hostname: site,
       port: 443,
       path: "/sitemap.xml",
@@ -33,7 +33,7 @@ function parseXML(site, options=undefined) {
   
   let sites = [];
 
-  const req = https.request(options, (res) => {
+  const req = https.request(sitemap_opts, (res) => {
     let sitemapString = "";
     
     res.on('data', (d) => {
@@ -62,5 +62,3 @@ module.exports = {
   "buildPageList": buildPageList,
   "parseXML": parseXML
 }
-
-// buildPageList(config.INIT_SITES).then((res) => { console.log(res)});

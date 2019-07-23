@@ -1,0 +1,10 @@
+{
+  "uri": "",
+  "SITE_LIST": [
+   "google.com",
+   "amazon.com"
+  ],
+  "LIGHTHOUSE_OPTS": {
+    "chromeFlags": ["--headless"]
+  }
+}

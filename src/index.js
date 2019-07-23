@@ -1,26 +1,16 @@
-/* TODO
- * Write the readme.md specifying what needs to go in config.js (maybe convert to ini)
- * Figure out how to close the client so we aren't opening up 1000 connections to the DB 
- * Write/fix unit tests
- * Write more analysis functions?
- * Why does the program hang after running all tests? (Related to client.close() location?)
- * Try removing the setTimeout in sitemap-processor
- */
-
 "use strict";
 
 const MongoClient = require("mongodb").MongoClient;
 const lighthouse = require("lighthouse");
 const chromeLauncher = require("chrome-launcher");
-const config = require("../config");
+const config = require("../config/config.json");
 const utils = require("./utils");
 const sitemapProcessor = require("./sitemap-processor");
 
 const uri = config.uri;
-const lighthouseOpts = config.lighthouse_opts;
+const lighthouseOpts = config.LIGHTHOUSE_OPTS;
 const todaysDate = utils.todaysDate;
 const buildPageList = sitemapProcessor.buildPageList;
-
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
 /**
@@ -41,9 +31,9 @@ function addObjectToDB(data) {
 
 /**
  * Source: https://github.com/GoogleChrome/lighthouse/blob/master/docs/headless-chrome.md
- * @param {String} url url to be tested by lighthouse
+ * @param {string} url url to be tested by lighthouse
  * @param {JSON} lighthouse_opts options for lighthouse
- * @param {*} config
+ * @param {JSON} config config for lighthouse
  */
 function launchChromeAndRunLighthouse(url, lighthouse_opts, config = null) {
   return chromeLauncher.launch({chromeFlags: lighthouse_opts.chromeFlags}).then(chrome => {
@@ -56,7 +46,7 @@ function launchChromeAndRunLighthouse(url, lighthouse_opts, config = null) {
 
 /**
  * Test a site with lighthouse then save the results to a database
- * @param {String} site the site address to lighthouse test
+ * @param {string} site the site address to lighthouse test
  */
 async function testSitesAndAddToDB(sites) {
   let time = Date.now();
@@ -67,7 +57,6 @@ async function testSitesAndAddToDB(sites) {
       addObjectToDB(
         {
           "_id": site,
-          // "json": JSON.stringify(results),
           "first-contentful-paint": results.audits["first-contentful-paint"],
           "first-meaningful-paint": results.audits["first-meaningful-paint"],
           "speed-index": results.audits["speed-index"],
@@ -94,7 +83,7 @@ async function testSitesAndAddToDB(sites) {
  * Test a number of sites with lighthouse then save the results to a database
  */
 if (require.main === module) {
-  buildPageList(config.INIT_SITES).then(res => {
+  buildPageList(config.SITE_LIST).then(res => {
     testSitesAndAddToDB(res);
   });
   client.close(); // where does this go?
