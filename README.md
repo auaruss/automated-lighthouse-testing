@@ -19,7 +19,8 @@ Clone this project. Go up to the "Clone or Download" button on the right and cop
 git clone <this url>
 ```
 ### Step 4
-Make a config.json in the config directory of the project with the following keys:<br/>
+Make a config.json in the config directory of the project with the following keys:
+
 | Key | Value |
 | :--- | :------ |
 | "uri"             | the location of your MongoDB, see https://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#the-url-connection-format |
