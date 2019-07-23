@@ -20,7 +20,8 @@ npm install
 ```
 
 ### Step 4
-Make a config.json in the config directory of the project with the following keys:
+Make a copy the file config.json.example named in the config directory of the project.
+It contains the following values:
 
 | Key | Value |
 | :--- | :------ |
