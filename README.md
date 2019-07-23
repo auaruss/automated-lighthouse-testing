@@ -8,16 +8,17 @@ This is a tool using Lighthouse to test all the pages in a list of sites and sav
 Install node.js v10.15.3 or later https://nodejs.org/en/download/
 
 ### Step 2
-Install the Lighthouse API with
-
-```bash
-npm i lighthouse
-```
-### Step 3
 Clone this project. Go up to the "Clone or Download" button on the right and copy the URL. Then run this:
 ```bash
 git clone <this url>
 ```
+
+### Step 3
+Install all dependencies by navigating to the project on your computer in the terminal and running
+```bash
+npm install
+```
+
 ### Step 4
 Make a config.json in the config directory of the project with the following keys:
 
