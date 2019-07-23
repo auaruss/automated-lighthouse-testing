@@ -25,7 +25,7 @@ It contains the following values:
 
 | Key | Value |
 | :--- | :------ |
-| "uri"             | the location of your MongoDB, see https://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#the-url-connection-format |
+| "uri"             | the location of your MongoDB; see https://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#the-url-connection-format |
 | "SITE_LIST"       | an array of strings, each being a site with a sitemap      |
 | "LIGHTHOUSE_OPTS" | see below                                                  |
 
