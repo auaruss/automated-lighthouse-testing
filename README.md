@@ -5,7 +5,7 @@ This is a tool using Lighthouse to test all the pages in a list of sites and sav
 ## Dependencies and installation
 
 ### Step 1
-Install node.js https://nodejs.org/en/download/
+Install node.js v10.15.3 or later https://nodejs.org/en/download/
 
 ### Step 2
 Install the Lighthouse API with
