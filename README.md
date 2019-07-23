@@ -1,4 +1,4 @@
-# Lighthouse Tests
+# Lighthouse tests
 
 This is a tool using Lighthouse to test all the pages in a list of sites and save the results in a MongoDB database.
 
@@ -21,7 +21,7 @@ git clone <this url>
 ### Step 4
 Make a config.json in the config directory of the project with the following keys:<br/>
 | Key | Value |
-| ------------- |:-------------:|
+| --- | ------ |
 | "uri"             | the location of your MongoDB, see https://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#the-url-connection-format |
 | "SITE_LIST"       | an array of strings, each being a site with a sitemap      |
 | "LIGHTHOUSE_OPTS" | see below                                                  |
