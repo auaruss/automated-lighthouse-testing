@@ -1,55 +1,11 @@
 {
   "uri": "",
   "SITE_LIST": [
-    "acp.iu.edu",
-    "bar.indiana.edu",
-    "iubest.indiana.edu",
-    "employers.cdc.indiana.edu",
-    "cdc.indiana.edu",
-    "studentemployment.cdc.indiana.edu",
-    "class.indiana.edu",
-    "sit.indiana.edu",
-    "engagedlearning.indiana.edu",
-    "gened.indiana.edu",
-    "hpplc.indiana.edu",
-    "hutton.indiana.edu",
-    "hiep.indiana.edu",
-    "ifs.indiana.edu",
-    "ovpueit.indiana.edu",
-    "iu2u.indiana.edu",
-    "accreditation.indiana.edu",
-    "iuhighschool.iu.edu",
-    "undergradresearch.indiana.edu",
-    "open.indiana.edu",
-    "nsa.indiana.edu",
-    "ovpue.indiana.edu",
-    "tsap.indiana.edu",
-    "sab.ovpue.indiana.edu",
-    "nondegree.indiana.edu",
-    "sac.indiana.edu",
-    "ud.indiana.edu",
-    "wellsscholars.indiana.edu",
-    "womeninstem.indiana.edu",
-    "wts.indiana.edu",
-    "citl.indiana.edu",
-    "iujur.iu.edu"
+   "google.com",
+   "amazon.com"
   ],
   "LIGHTHOUSE_OPTS": {
-    "chromeFlags": ["--headless"],
-    "onlyAudits": [
-      "first-contentful-paint",
-      "first-meaningful-paint",
-      "speed-index",
-      "first-cpu-idle",
-      "dom-size",
-      "estimated-input-latency",
-      "network-payload",
-      "legible-font-sizes",
-      "performance-info",
-      "accessibility-info",
-      "best-practices-info",
-      "seo-info",
-      "pwa-info"
+    "chromeFlags": ["--headless"]
     ]
   },
 }
