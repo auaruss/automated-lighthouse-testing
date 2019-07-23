@@ -37,8 +37,8 @@ Example of LIGHTHOUSE_OPTS (feel free to use this example):
     }
 
 To learn more, see:
-https://github.com/GoogleChrome/lighthouse/blob/master/docs/readme.md#using-programmatically</br>
-https://github.com/GoogleChrome/lighthouse/blob/888bd6dc9d927a734a8e20ea8a0248baa5b425ed/typings/externs.d.ts#L82-L119
+- https://github.com/GoogleChrome/lighthouse/blob/master/docs/readme.md#using-programmatically
+- https://github.com/GoogleChrome/lighthouse/blob/888bd6dc9d927a734a8e20ea8a0248baa5b425ed/typings/externs.d.ts#L82-L119
 
 ## Usage
 Navigate with the command line to the src folder, then run
