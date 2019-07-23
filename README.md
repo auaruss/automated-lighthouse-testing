@@ -19,17 +19,19 @@ Clone this project. Go up to the "Clone or Download" button on the right and cop
 git clone <this url>
 ```
 ### Step 4
-Make a config.json in the root directory of the project with the following keys:<br/>
-"uri" (the location of your MongoDB, see https://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#the-url-connection-format)<br/>
-"SITE_LIST" (an array of strings, each being a site with a sitemap)<br/>
-"LIGHTHOUSE_OPTS"<br/>
-"SITEMAP_OPTS" (optional; you don't need this if your sitemaps are located at /sitemap.xml)
+Make a config.json in the config directory of the project with the following keys:<br/>
+| Key | Value |
+| ------------- |:-------------:|
+| "uri"             | the location of your MongoDB, see https://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#the-url-connection-format |
+| "SITE_LIST"       | an array of strings, each being a site with a sitemap      |
+| "LIGHTHOUSE_OPTS" | see below                                                  |
 
+#### More about Lighthouse options
 Example of LIGHTHOUSE_OPTS (feel free to use this example):
 
     {
-        chromeFlags: ["--headless"],
-        onlyAudits: [
+        "chromeFlags": ["--headless"],
+        "onlyAudits": [
           "first-contentful-paint",
           "first-meaningful-paint",
           "speed-index",
@@ -46,8 +48,8 @@ Example of LIGHTHOUSE_OPTS (feel free to use this example):
         ]
     }
 
-To learn more, see:<br/>
-https://github.com/GoogleChrome/lighthouse/blob/master/docs/readme.md#using-programmatically <br/>
+To learn more, see:
+https://github.com/GoogleChrome/lighthouse/blob/master/docs/readme.md#using-programmatically
 https://github.com/GoogleChrome/lighthouse/blob/888bd6dc9d927a734a8e20ea8a0248baa5b425ed/typings/externs.d.ts#L82-L119
 
 ## Usage

@@ -5,9 +5,9 @@ const https = require("https");
  * @param {string[]} sites list of site links to XML files
  * @return {Promise<string[]>} all pages linked to in all the XML files
  */
-function buildPageList(sites, sitemap_opts=undefined) {
+function buildPageList(sites) {
   return Promise.all( 
-    sites.map(site => { return parseXML(site, sitemap_opts); }))
+    sites.map(site => { return parseXML(site); }))
     .then(res => {
       return [].concat.apply([], res); // https://stackoverflow.com/questions/10865025/merge-flatten-an-array-of-arrays
     });
