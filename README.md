@@ -40,6 +40,10 @@ To learn more, see:
 - https://github.com/GoogleChrome/lighthouse/blob/master/docs/readme.md#using-programmatically
 - https://github.com/GoogleChrome/lighthouse/blob/888bd6dc9d927a734a8e20ea8a0248baa5b425ed/typings/externs.d.ts#L82-L119
 
+#### More about MongoDB
+To quickly set up an online MongoDB database, see:
+- https://docs.atlas.mongodb.com/getting-started/
+
 ## Usage
 Navigate with the command line to the `src` folder, then run
 ```bash

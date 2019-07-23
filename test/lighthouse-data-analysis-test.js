@@ -2,7 +2,7 @@
 
 const assert = require("assert");
 const lighthouseDataAnalysis = require("../src/lighthouse-data-analysis");
-const SAMPLE_DATA = require("../sample-data").SAMPLE_DATA;
+const SAMPLE_DATA = require("./sample-data.json").SAMPLE_DATA;
 
 describe("lighthouse-data-analysis", () => {
   describe("analyzeAttributes", () => {
