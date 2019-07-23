@@ -19,6 +19,9 @@ const client = new MongoClient(uri, { useNewUrlParser: true });
  */
 function addObjectToDB(data) {
   client.connect(err => {
+    if (err) {
+      console.log(err);
+    }
     const date = todaysDate();
     const collection = client.db("lighthouse_test").collection(date);
     
