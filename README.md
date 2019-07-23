@@ -10,7 +10,7 @@ Install node.js v10.15.3 or later https://nodejs.org/en/download/
 ### Step 2
 Clone this project. Go up to the "Clone or Download" button on the right and copy the URL. Then run this:
 ```bash
-git clone <this url>
+git clone https://github.iu.edu/BL-VPUE-IT/lighthouse-tests.git
 ```
 
 ### Step 3
