@@ -31,7 +31,7 @@ function addObjectToDB(data) {
       console.log("Inserted document into the collection");
     });
   });
-  client.close(); // where does this go?
+  client.close();
 }
 
 /**
