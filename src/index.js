@@ -9,6 +9,7 @@ const sitemapProcessor = require("./sitemap-processor");
 
 const uri = config.uri;
 const lighthouseOpts = config.LIGHTHOUSE_OPTS;
+const dataSaved = config.DATA_SAVED;
 const todaysDate = utils.todaysDate;
 const buildPageList = sitemapProcessor.buildPageList;
 const client = new MongoClient(uri, { useNewUrlParser: true });
@@ -30,6 +31,27 @@ function addObjectToDB(data) {
       console.log("Inserted document into the collection");
     });
   });
+  client.close(); // where does this go?
+}
+
+/**
+ * Format the data returned from lighthouse to be stored in the database
+ * @param {string} site the site tested by lighthouse
+ * @param {JSON} results the results from the lighthouse api
+ * @return {JSON} the data to be stored in the database
+ */
+function savedLighthouseData(site, results) {
+  let o = {
+    "_id": site,
+  };
+
+  for (let key of Object.keys(dataSaved)) {
+    for (let key1 of dataSaved[key]) {
+      o[key1] = results[key][key1];
+    }
+  }
+
+  return o;
 }
 
 /**
@@ -57,24 +79,7 @@ async function testSitesAndAddToDB(sites) {
   for (let site of sites) {
     console.log("Testing " + site);
     await launchChromeAndRunLighthouse(site, lighthouseOpts).then(results => {
-      addObjectToDB(
-        {
-          "_id": site,
-          "first-contentful-paint": results.audits["first-contentful-paint"],
-          "first-meaningful-paint": results.audits["first-meaningful-paint"],
-          "speed-index": results.audits["speed-index"],
-          "first-cpu-idle": results.audits["first-cpu-idle"],
-          "dom-size": results.audits["dom-size"],
-          "estimated-input-latency": results.audits["estimated-input-latency"],
-          "network-payload": results.audits["total-byte-weight"],
-          "legible-font-sizes": results.audits["font-size"],
-          "performance-info": results.categories["performance"],
-          "accessibility-info": results.categories["accessibility"],
-          "best-practices-info": results.categories["best-practices"],
-          "seo-info": results.categories["seo"],
-          "pwa-info": results.categories["pwa"]
-        }
-      );
+      addObjectToDB(savedLighthouseData(site, results));
     }).catch();
   }
 
@@ -89,5 +94,4 @@ if (require.main === module) {
   buildPageList(config.SITE_LIST).then(res => {
     testSitesAndAddToDB(res);
   });
-  client.close(); // where does this go?
 }

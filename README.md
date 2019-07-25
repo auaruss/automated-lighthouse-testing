@@ -26,15 +26,36 @@ It contains the following values:
 | Key | Value |
 | :--- | :------ |
 | "uri"             | the location of your MongoDB; see https://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#the-url-connection-format |
-| "SITE_LIST"       | an array of strings, each being a site with a sitemap (do not add http:// or https:// )     |
-| "LIGHTHOUSE_OPTS" | see below                                                  |
+| "SITE_LIST"       | an array of strings, each being a site with a sitemap (do not add http:// or https:// ) |
+| "LIGHTHOUSE_OPTS" | see below |
+| "DATA_SAVED" | see below |
 
 #### More about Lighthouse options
-Example of LIGHTHOUSE_OPTS (feel free to use this example):
+Example of LIGHTHOUSE_OPTS (for now, just use this example for best results):
 
     {
-        "chromeFlags": ["--headless"],
+        "chromeFlags": ["--headless"]
     }
+
+Example of DATA_SAVED (feel free to try and add or remove audits/categories data; see the links below for more info on the lighthouse API):
+    {
+        "audits": [
+        "first-contentful-paint",
+        "first-meaningful-paint",
+        "speed-index",
+        "first-cpu-idle",
+        "dom-size",
+        "estimated-input-latency",
+        "total-byte-weight",
+        "font-size"
+        ],
+        "categories": [
+        "accessibility",
+        "best-practices",
+        "seo",
+        "pwa"
+        ]
+  }
 
 To learn more, see:
 - https://github.com/GoogleChrome/lighthouse/blob/master/docs/readme.md#using-programmatically
