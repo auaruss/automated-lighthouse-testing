@@ -40,20 +40,20 @@ Example of LIGHTHOUSE_OPTS (for now, just use this example for best results):
 Example of DATA_SAVED (feel free to try and add or remove audits/categories data; see the links below for more info on the lighthouse API):
     {
         "audits": [
-        "first-contentful-paint",
-        "first-meaningful-paint",
-        "speed-index",
-        "first-cpu-idle",
-        "dom-size",
-        "estimated-input-latency",
-        "total-byte-weight",
-        "font-size"
+            "first-contentful-paint",
+            "first-meaningful-paint",
+            "speed-index",
+            "first-cpu-idle",
+            "dom-size",
+            "estimated-input-latency",
+            "total-byte-weight",
+            "font-size"
         ],
         "categories": [
-        "accessibility",
-        "best-practices",
-        "seo",
-        "pwa"
+            "accessibility",
+            "best-practices",
+            "seo",
+            "pwa"
         ]
   }
 
