@@ -20,42 +20,41 @@ function buildPageList(sites) {
  * @return {Promise<string[]>} all pages linked to from the XML
  */
 function parseXML(site, sitemap_opts=undefined) {
+  return new Promise((resolve, reject) => {
+    // To allow other users to specify a different location of the XML on the site
+    if (! sitemap_opts) {
+      sitemap_opts = {
+        hostname: site,
+        port: 443,
+        path: "/sitemap.xml",
+        method: "GET"
+      };
+    }
 
-  // To allow other users to specify a different location of the XML on the site
-  if (! sitemap_opts) {
-    sitemap_opts = {
-      hostname: site,
-      port: 443,
-      path: "/sitemap.xml",
-      method: "GET"
-    };
-  }
-  
-  let sites = [];
+    let sites = [];
 
-  const req = https.request(sitemap_opts, (res) => {
-    let sitemapString = "";
-    
-    res.on('data', (d) => {
-      sitemapString += d.toString();
+    const req = https.request(sitemap_opts, (res) => {
+      let sitemapString = "";
+
+      res.on('data', (d) => {
+        sitemapString += d.toString();
+      });
+
+      res.on('end', () => {
+        sites = sitemapString.replace(/(\r\n|\n|\r|\s)/gm, "").match(/https[^<]+/g);
+
+        resolve(sites)
+      });
     });
 
-    res.on('end', () => {
-      sites = sitemapString.replace(/(\r\n|\n|\r|\s)/gm, "").match(/https[^<]+/g);
+    req.on('error', (e) => {
+      console.error(e);
+
+      reject(e)
     });
-  });
 
-  req.on('error', (e) => {
-    console.error(e);
-  });
-
-  req.end();
-
-  return new Promise((res, err) => {
-    setTimeout(() => {
-			res(sites);
-		}, 1000);
-  });
+    req.end();
+  })
 }
 
 module.exports = {
