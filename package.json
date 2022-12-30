@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "lighthouse": "^5.1.0",
-    "mocha": "^6.1.4"
+    "mocha": "^10.2.0"
   },
   "dependencies": {
     "lighthouse-batch": "^5.0.1",
